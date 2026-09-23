@@ -31,7 +31,7 @@ namespace WeddingAppMVC.Services
         public async Task<bool> UpdateAsync(int id, Guest input)
         {
             var guest = await _context.Guests.FindAsync(id);
-            if (guest == null)
+            if (guest is null)
                 return false;
 
             guest.FirstName = input.FirstName;
@@ -42,6 +42,9 @@ namespace WeddingAppMVC.Services
             guest.NumberOfAttendants = input.NumberOfAttendants;
             guest.Message = input.Message;
 
+            if (input.HasResponded)
+                guest.HasResponded = true;
+
             await _context.SaveChangesAsync();
             return true;
         }
@@ -49,7 +52,7 @@ namespace WeddingAppMVC.Services
         public async Task<bool> DeleteAsync(int id)
         {
             var guest = await _context.Guests.FindAsync(id);
-            if (guest == null)
+            if (guest is null)
                 return false;
 
             _context.Guests.Remove(guest);

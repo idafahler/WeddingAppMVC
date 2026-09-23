@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using WeddingAppMVC.Data;
 using WeddingAppMVC.Services;
 
@@ -8,6 +9,10 @@ namespace WeddingAppMVC
     {
         public static void Main(string[] args)
         {
+            var culture = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>

@@ -1,0 +1,35 @@
+﻿@model Guest
+
+@{
+    ViewData["Title"] = Model.FullName;
+}
+
+<section class="section-background text-center">
+    <h1>Guest details</h1>
+    <p class="text-under-title">Here you can see all available details for the selected guest.</p>
+
+    <div class="text-section confirmation-section">
+        <p>Name: @Model.FullName</p>
+        <p>Id: @Model.Id</p>
+        <p>Email: @Model.Email</p>
+        <p>Phone number: @Model.PhoneNumber</p>
+        <p>Guest was registered: @Model.RegistrationDate</p>
+        @if (Model.HasResponded)
+        {
+            <p>Attending: @(Model.Attendance ? "Yes" : "No")</p>
+            <p>Number of attendants: @Model.NumberOfAttendants</p>
+            @if(Model.Message is not null)
+            {
+                <p>Message: @Model.Message</p>
+            }
+        }
+        else
+        {
+            <p>Attending: <i>Guest has not answered their invitation yet.</i></p>
+        }
+    </div>
+    <div class="button-section">
+        <a asp-controller="Guest" asp-action="Index" class="btn btn-sm btn-outline-secondary">Back to guest list</a>
+        <a asp-controller="Guest" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-secondary">Edit guest</a>
+    </div>
+</section>

@@ -4,5 +4,31 @@
 }
 
 <section class="section-background text-center">
-    <h1 class="display-4">Confirmation on RSVP</h1>
+    <h1>Thank you!</h1>
+
+    @if (Model.Attendance)
+    {
+        <h3>We can't wait to celebrate with you.</h3>
+    }
+    else
+    {
+        <h3>We're sorry you can't make it, but thank you for letting us know.</h3>
+    }
+    <p class="text-under-title">Your response has been sent to Alice &amp; Bob.</p>
+
+    <article class="text-section confirmation-section">
+        <h4>Your response</h4>
+
+        <p>Name: @Model.FullName</p>
+        <p>Email: @Model.Email</p>
+        <p>Phone number: @Model.PhoneNumber</p>
+        <p>Attending: @(Model.Attendance ? "Yes" : "No")</p>
+        <p>Number of attendants: @Model.NumberOfAttendants</p>
+        @if (!string.IsNullOrWhiteSpace(Model.Message))
+        {
+            <p class="optional-message-guest">Message: @Model.Message</p>
+        }
+    </article>
+
+    <a asp-controller="Guest" asp-action="Index" class="link-in-text">Back to guest list</a>
 </section>

@@ -35,6 +35,11 @@ namespace WeddingAppMVC.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
                     b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
@@ -60,6 +65,7 @@ namespace WeddingAppMVC.Migrations
                         {
                             Id = 1,
                             Address = "18 Willow Lane, Hampshire, England",
+                            Description = "The ceremony will take place outdoors in the estate's beautiful garden, surrounded by flowers and old oak trees. Guests are kindly asked to arrive at least 30 minutes before the ceremony begins.",
                             Location = "Rosewood Estate",
                             StartTime = new DateTime(2027, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The ceremony"
@@ -68,6 +74,7 @@ namespace WeddingAppMVC.Migrations
                         {
                             Id = 2,
                             Address = "18 Willow Lane, Hampshire, England",
+                            Description = "Following the ceremony, we will continue the celebrations with drinks, dinner, speeches, and dancing in the main hall at Rosewood Estate.",
                             Location = "Rosewood Estate",
                             StartTime = new DateTime(2027, 6, 20, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             Title = "The reception"
@@ -76,6 +83,7 @@ namespace WeddingAppMVC.Migrations
                         {
                             Id = 3,
                             Address = "18 Willow Lane, Hampshire, England",
+                            Description = "A three-course dinner will be served in the main hall. Please let us know about any allergies or dietary requirements in your RSVP message.",
                             Location = "Rosewood Estate",
                             StartTime = new DateTime(2027, 6, 20, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Dinner"
@@ -84,6 +92,7 @@ namespace WeddingAppMVC.Migrations
                         {
                             Id = 4,
                             Address = "18 Willow Lane, Hampshire, England",
+                            Description = "After dinner, the newlyweds will share their first dance. The dance floor then opens to all guests, and the celebrations continue into the night.",
                             Location = "Rosewood Estate",
                             StartTime = new DateTime(2027, 6, 20, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Title = "First dance"
@@ -98,7 +107,7 @@ namespace WeddingAppMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("Attendance")
+                    b.Property<bool>("Attendance")
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
@@ -110,6 +119,9 @@ namespace WeddingAppMVC.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("HasResponded")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -138,8 +150,10 @@ namespace WeddingAppMVC.Migrations
                         new
                         {
                             Id = 1,
+                            Attendance = false,
                             Email = "emma.andersson@example.com",
                             FirstName = "Emma",
+                            HasResponded = false,
                             LastName = "Andersson",
                             NumberOfAttendants = 1,
                             PhoneNumber = "070 123 45 67",
@@ -148,8 +162,10 @@ namespace WeddingAppMVC.Migrations
                         new
                         {
                             Id = 2,
+                            Attendance = false,
                             Email = "oscar.lindqvist@example.com",
                             FirstName = "Oscar",
+                            HasResponded = false,
                             LastName = "Lindqvist",
                             NumberOfAttendants = 1,
                             PhoneNumber = "073 234 56 78",
@@ -158,8 +174,10 @@ namespace WeddingAppMVC.Migrations
                         new
                         {
                             Id = 3,
+                            Attendance = false,
                             Email = "sara.berg@example.com",
                             FirstName = "Sara",
+                            HasResponded = false,
                             LastName = "Berg",
                             NumberOfAttendants = 1,
                             PhoneNumber = "076 345 67 89",
@@ -171,6 +189,7 @@ namespace WeddingAppMVC.Migrations
                             Attendance = true,
                             Email = "johan.nilsson@example.com",
                             FirstName = "Johan",
+                            HasResponded = true,
                             LastName = "Nilsson",
                             Message = "Looking forward to it!",
                             NumberOfAttendants = 2,
@@ -183,6 +202,7 @@ namespace WeddingAppMVC.Migrations
                             Attendance = true,
                             Email = "lina.karlsson@example.com",
                             FirstName = "Lina",
+                            HasResponded = true,
                             LastName = "Karlsson",
                             Message = "I'm vegetarian.",
                             NumberOfAttendants = 1,
@@ -195,6 +215,7 @@ namespace WeddingAppMVC.Migrations
                             Attendance = true,
                             Email = "erik.svensson@example.com",
                             FirstName = "Erik",
+                            HasResponded = true,
                             LastName = "Svensson",
                             Message = "Bringing the kids, hope that's fine.",
                             NumberOfAttendants = 4,
@@ -207,6 +228,7 @@ namespace WeddingAppMVC.Migrations
                             Attendance = false,
                             Email = "maja.holm@example.com",
                             FirstName = "Maja",
+                            HasResponded = true,
                             LastName = "Holm",
                             Message = "Sadly can't make it, congratulations!",
                             NumberOfAttendants = 1,

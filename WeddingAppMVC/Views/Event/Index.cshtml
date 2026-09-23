@@ -4,5 +4,20 @@
 }
 
 <section class="section-background text-center">
-    <h1 class="display-4">The wedding</h1>
+    <h1 class="display-4">Alice &amp; Bob's forever begins</h1>
+
+    @foreach(var e in Model)
+    {
+        <article class="text-section">
+            <h2 class="text-under-title">@e.Title</h2>
+            <p>Starting time: @e.StartTime.ToString("h:mm tt")</p>
+            @if(e.EndTime is not null)
+            {
+                <p>Ending time: @e.EndTime.Value.ToString("h:mm tt")</p>
+            }
+            <p>Location: @e.Location</p>
+            <p>Address: @e.Address</p>
+            <p>Description: @e.Description</p>
+        </article>
+    }
 </section>

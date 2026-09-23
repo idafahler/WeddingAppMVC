@@ -27,5 +27,9 @@ namespace WeddingAppMVC.Models
         [StringLength(150, MinimumLength = 2, ErrorMessage = "Must be between 2-150 characters")]
         [Display(Prompt = "18 Willow Lane, Hampshire, England")]
         public string Address { get; set; }
+
+        [Required(ErrorMessage = "Description of some sort must be entered")]
+        [StringLength(1000, MinimumLength = 5, ErrorMessage = "Must be between 5-1000 characters")]
+        public string Description { get; set; }
     }
 }

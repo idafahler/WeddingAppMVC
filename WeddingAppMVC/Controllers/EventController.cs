@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WeddingAppMVC.Models;
 using WeddingAppMVC.Services;
 
 namespace WeddingAppMVC.Controllers
@@ -10,9 +11,10 @@ namespace WeddingAppMVC.Controllers
         {
             _service = service;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Event> events = await _service.GetAllAsync();
+            return View(events);
         }
     }
 }

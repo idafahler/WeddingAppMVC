@@ -1,0 +1,19 @@
+﻿@model Guest
+
+@{
+    ViewData["Title"] = "Delete guest";
+}
+
+<section class="section-background text-center">
+    <h1>Delete guest</h1>
+    <p class="text-under-title">Are you sure you want to delete this guest?</p>
+
+    <p><strong>@Model.FullName</strong></p>
+
+    <div class="button-section">
+        <form method="post">
+            <button type="submit" class="btn btn-outline-danger btn-delete-confirmation">Delete</button>
+        </form>
+        <a asp-controller="Guest" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</section>

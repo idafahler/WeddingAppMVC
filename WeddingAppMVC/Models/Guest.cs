@@ -36,7 +36,7 @@ namespace WeddingAppMVC.Models
 
 
         [Display(Name = "I will attend ")]
-        public bool? Attendance { get; set; }
+        public bool Attendance { get; set; }
 
 
         [Range(1, 10, ErrorMessage = "Number of attendants can only be between 1-10")]
@@ -52,6 +52,10 @@ namespace WeddingAppMVC.Models
         [BindNever] //RegistrationDate is set in controller, not by user in form
         [Display(Name = "Registration date")]
         public DateTime RegistrationDate { get; set; }
+
+        [BindNever]
+        [Display(Name = "Has responded")]
+        public bool HasResponded { get; set; }
 
 
         public string FullName => $"{FirstName} {LastName}";

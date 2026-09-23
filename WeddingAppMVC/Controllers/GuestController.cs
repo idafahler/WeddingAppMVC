@@ -13,7 +13,7 @@ namespace WeddingAppMVC.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var guests = await _service.GetAllAsync();
+            List<Guest> guests = await _service.GetAllAsync();
             return View(guests);
         }
 
@@ -22,20 +22,103 @@ namespace WeddingAppMVC.Controllers
             return View();
         }
 
-        public IActionResult Rsvp()
+        [HttpPost]
+        public async Task<IActionResult> Create(Guest guest)
         {
-            return View();
+            if (!ModelState.IsValid)
+                return View();
+            await _service.AddAsync(guest);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Rsvp(int id)
+        {
+            Guest? guest = await _service.GetByIdAsync(id);
+            if (guest is null)
+                return NotFound();
+
+            return View(guest);
         }
 
         [HttpPost]
-        public IActionResult Rsvp(Guest guest)
+        public async Task<IActionResult> Rsvp(int id, Guest guest)
+        {
+            if (!ModelState.IsValid)
+                return View(guest);
+
+            guest.HasResponded = true;
+
+            bool updated = await _service.UpdateAsync(id, guest);
+            if (!updated)
+                return NotFound();
+
+            return RedirectToAction(nameof(Confirmation), new { id });
+        }
+
+        public async Task<IActionResult> Confirmation(int id)
+        {
+            Guest? guest = await _service.GetByIdAsync(id);
+            if (guest is null)
+                return NotFound();
+
+            return View(guest);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            Guest? guest = await _service.GetByIdAsync(id);
+            if (guest is null)
+                return NotFound();
+
+            return View(guest);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            Guest? guest = await _service.GetByIdAsync(id);
+            if (guest is null)
+                return NotFound();
+
+            return View(guest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Guest guest)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                Guest existing = await _service.GetByIdAsync(id);
+                if (existing is null)
+                    return NotFound();
+
+                guest.HasResponded = existing.HasResponded;
+                return View(guest);
             }
-            _service.AddAsync(guest);
-            return RedirectToAction("Confirmation");
+
+            bool updated = await _service.UpdateAsync(id, guest);
+            if (!updated)
+                return NotFound();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            Guest? guest = await _service.GetByIdAsync(id);
+            if (guest is null)
+                return NotFound();
+
+            return View(guest);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmation(int id)
+        {
+            bool deleted =await _service.DeleteAsync(id);
+            if (!deleted)
+                return NotFound();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
