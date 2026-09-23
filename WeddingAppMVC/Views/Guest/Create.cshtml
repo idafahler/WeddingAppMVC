@@ -3,6 +3,46 @@
     ViewData["Title"] = "Register guest";
 }
 
-<section class="section-background text-center">
-    <h1 class="display-4">Register new guest</h1>
+<section class="section-background container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <h1 class="text-center">Register new guest</h1>
+            <p class="text-under-title text-center">Please enter the new guest's information to register them.</p>
+
+            <form method="post">
+
+                <!--First name-->
+                <div class="mb-3">
+                    <label asp-for="@Model.FirstName" class="form-label"></label>
+                    <input asp-for="@Model.FirstName" class="form-control" />
+                    <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                </div>
+
+                <!--Last name-->
+                <div class="mb-3">
+                    <label asp-for="@Model.LastName" class="form-label"></label>
+                    <input asp-for="@Model.LastName" class="form-control" />
+                    <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                </div>
+
+                <!--Email-->
+                <div class="mb-3">
+                    <label asp-for="@Model.Email" class="form-label"></label>
+                    <input asp-for="@Model.Email" class="form-control" type="email" />
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                </div>
+
+                <!--Phone number-->
+                <div class="mb-3">
+                    <label asp-for="@Model.PhoneNumber" class="form-label"></label>
+                    <input asp-for="@Model.PhoneNumber" class="form-control" type="tel" />
+                    <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn form-button">Register guest</button>
+
+            </form>
+
+        </div>
+    </div>
 </section>

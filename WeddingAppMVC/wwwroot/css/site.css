@@ -111,7 +111,7 @@ form {
     margin: 2rem 0 0 0;
 }
 
-.rsvp-button {
+.form-button {
     background-color: var(--darker-green);
     padding: 0.2rem 1rem;
 }

@@ -5,4 +5,39 @@
 
 <section class="section-background text-center">
     <h1 class="display-4">All guests</h1>
+
+    <table class="table table-striped table-hover guest-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m[0].FullName)</th>
+                <th>@Html.DisplayNameFor(m => m[0].Email)</th>
+                <th>@Html.DisplayNameFor(m => m[0].PhoneNumber)</th>
+                <th>@Html.DisplayNameFor(m => m[0].Attendance)</th>
+                <th>@Html.DisplayNameFor(m => m[0].NumberOfAttendants)</th>
+                <th class="message-col">@Html.DisplayNameFor(m => m[0].Message)</th>
+                <th>@Html.DisplayNameFor(m => m[0].RegistrationDate)</th>
+            </tr>
+        </thead>
+    <tbody>
+            @foreach(var guest in Model)
+            {
+                <tr>
+                    <td>@guest.FullName</td>
+                    <td>@guest.Email</td>
+                    <td>@guest.PhoneNumber</td>
+                    <td>
+                        @(guest.Attendance switch
+                        {
+                            true => "Yes",
+                            false => "No",
+                            null => "No response"
+                        })
+                    </td>
+                    <td>@guest.NumberOfAttendants</td>
+                    <td>@guest.Message</td>
+                    <td>@guest.RegistrationDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </section>

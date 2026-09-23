@@ -31,7 +31,7 @@ namespace WeddingAppMVC.Models
 
         [Required(ErrorMessage = "Phone number is required")]
         [Phone(ErrorMessage = "Submit a valid phone number")]
-        [Display(Name = "Phone number", Prompt = "070 123 45 67")]
+        [Display(Name = "Phone number*", Prompt = "070 123 45 67")]
         public string PhoneNumber { get; set; }
 
 

@@ -11,9 +11,10 @@ namespace WeddingAppMVC.Controllers
         {
             _service = service;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var guests = await _service.GetAllAsync();
+            return View(guests);
         }
 
         public IActionResult Create()
@@ -26,7 +27,7 @@ namespace WeddingAppMVC.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Rsvp(Guest guest)
         {
             if (!ModelState.IsValid)
