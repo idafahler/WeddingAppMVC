@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Event
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="section-background text-center">
+    <h1 class="display-4">Welcome!</h1>
+    <article class="hero">
+        <img class="hero-image" src="~/images/hero.jpg" alt="Engagement" />
+    </article>
+
+    <article class="text-section">
+        <h2>You are invited to the wedding of Alice &amp; Bob</h2>
+
+        <div class="image-banner">
+            <img class="banner-picture" src="~/images/img-banner1.png" alt="Bridal pair" />
+            <img class="banner-picture" src="~/images/img-banner2.png" alt="Ring" />
+            <img class="banner-picture" src="~/images/img-banner3.png" alt="Wedding cake" />
+            <img class="banner-picture" src="~/images/img-banner4.png" alt="Bouquet of flowers" />
+            <img class="banner-picture" src="~/images/img-banner5.png" alt="Bow" />
+        </div>
+
+        <p>
+            We’re so happy to have you here!
+            Welcome to the official wedding website of Alice &amp; Bob.
+            Here you’ll be able to see information about the different events, 
+            register guests and rvsp for guests. 
+        </p>
+        <p class="text-under-title"><i>We can’t wait to celebrate with you!</i></p>
+    </article>
+</section>

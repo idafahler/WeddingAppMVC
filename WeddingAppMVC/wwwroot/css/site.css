@@ -1,3 +1,13 @@
+:root {
+    --light-green: #edf2ea;
+    --darker-green: #9daa98;
+    --text-green: #37512e;
+    --shadow-section: rgba(0,0,0,0.3);
+    --link: #304936;
+    --link-hover: #406048;
+    --white: #ffffff;
+}
+
 html {
   font-size: 14px;
 }
@@ -18,7 +28,12 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+
+    /*Background picture*/
+    background-image: url('../images/flower-background-cropped.jpg');
+    background-repeat: repeat;
+    background-size: 450px auto;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -29,3 +44,142 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.wedding-nav {
+    background-color: var(--light-green);
+}
+
+.nav-img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.header-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: var(--text-green);
+}
+
+.hero-image {
+    max-width: 50rem;
+    width: 100%;
+    border-radius: 5px;
+    border: 3px solid var(--white);
+}
+
+.image-banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+
+    .banner-picture {
+        max-width: 70px;
+        width: 100%;
+    }
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+}
+
+h2, h3, h4, .text-under-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+}
+
+.text-under-title {
+    font-size: 1.3rem;
+}
+
+.section-background {
+    background-color: var(--light-green);
+    padding: 4rem 1.5rem;
+    margin: 4rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(129,160,91,0.3);
+    box-shadow: 0 4px 20px var(--shadow-section);
+}
+
+.text-section {
+    margin: 3rem 5rem;
+}
+
+form {
+    margin: 2rem 0 0 0;
+}
+
+.rsvp-button {
+    background-color: var(--darker-green);
+    padding: 0.2rem 1rem;
+}
+
+.link-in-text {
+    color: var(--link);
+}
+
+    .link-in-text:hover {
+        color: var(--link-hover);
+    }
+
+    .link-in-text:visited {
+        color: var(--link-hover);
+    }
+
+.optional-message-guest {
+    overflow-wrap: break-word;
+}
+
+.guest-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+    .guest-table th.message-col {
+        width: 35%;
+    }
+
+    .guest-table td {
+        overflow-wrap: break-word;
+    }
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 3rem 0;
+}
+
+.gallery-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.footer {
+    background-color: var(--light-green);
+    display: flex;
+    justify-content: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+@media (max-width: 576px) {
+    .image-banner {
+        display: none;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
