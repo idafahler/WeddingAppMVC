@@ -9,23 +9,23 @@
     <p class="text-under-title">Here you can see all available details for the selected guest.</p>
 
     <div class="text-section confirmation-section">
-        <p>Name: @Model.FullName</p>
-        <p>Id: @Model.Id</p>
-        <p>Email: @Model.Email</p>
-        <p>Phone number: @Model.PhoneNumber</p>
-        <p>Guest was registered: @Model.RegistrationDate</p>
+        <p><strong>Name:</strong> @Model.FullName</p>
+        <p><strong>Id:</strong> @Model.Id</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Phone number:</strong> @Model.PhoneNumber</p>
+        <p><strong>Guest was registered:</strong> @Model.RegistrationDate</p>
         @if (Model.HasResponded)
         {
-            <p>Attending: @(Model.Attendance ? "Yes" : "No")</p>
-            <p>Number of attendants: @Model.NumberOfAttendants</p>
+            <p><strong>Attending:</strong> @(Model.Attendance ? "Yes" : "No")</p>
+            <p><strong>Number of attendants:</strong> @Model.NumberOfAttendants</p>
             @if(Model.Message is not null)
             {
-                <p>Message: @Model.Message</p>
+                <p><strong>Message:</strong> @Model.Message</p>
             }
         }
         else
         {
-            <p>Attending: <i>Guest has not answered their invitation yet.</i></p>
+            <p><strong>Attending:</strong> <i>Guest has not answered their invitation yet.</i></p>
         }
     </div>
     <div class="button-section">

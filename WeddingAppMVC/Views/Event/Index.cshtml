@@ -10,14 +10,14 @@
     {
         <article class="text-section">
             <h2 class="text-under-title">@e.Title</h2>
-            <p>Starting time: @e.StartTime.ToString("h:mm tt")</p>
+            <p><strong>Starting time:</strong> @e.StartTime.ToString("h:mm tt")</p>
             @if(e.EndTime is not null)
             {
-                <p>Ending time: @e.EndTime.Value.ToString("h:mm tt")</p>
+                <p><strong>Ending time:</strong> @e.EndTime.Value.ToString("h:mm tt")</p>
             }
-            <p>Location: @e.Location</p>
-            <p>Address: @e.Address</p>
-            <p>Description: @e.Description</p>
+            <p><strong>Location:</strong> @e.Location</p>
+            <p><strong>Address:</strong> @e.Address</p>
+            <p><strong>Description:</strong> @e.Description</p>
         </article>
     }
 </section>

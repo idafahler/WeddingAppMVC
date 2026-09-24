@@ -11,10 +11,23 @@ namespace WeddingAppMVC.Controllers
         {
             _service = service;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? filter, string? sortBy)
         {
-            List<Guest> guests = await _service.GetAllAsync();
-            return View(guests);
+            List<Guest> allGuests = await _service.GetAllAsync();
+
+            var viewModel = new GuestListViewModel
+            {
+                Guests = await _service.GetFilteredAsync(filter, sortBy),
+                Filter = filter,
+                SortBy = sortBy,
+                TotalGuests = allGuests.Count,
+                Attending = allGuests.Count(g => g.HasResponded && g.Attendance),
+                NotAttending = allGuests.Count(g => g.HasResponded && !g.Attendance),
+                NotAnswered = allGuests.Count(g => !g.HasResponded),
+                TotalAttendants = allGuests.Where(g => g.HasResponded && g.Attendance).Sum(g => g.NumberOfAttendants ?? 0)
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Create()

@@ -59,5 +59,30 @@ namespace WeddingAppMVC.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<List<Guest>> GetFilteredAsync(string? filter, string? sortBy)
+        {
+            IQueryable<Guest> query = _context.Guests;
+
+            query = filter switch
+            {
+                "attending" => query.Where(g => g.HasResponded && g.Attendance),
+                "notattending" => query.Where(g => g.HasResponded && !g.Attendance),
+                "notanswered" => query.Where(g => !g.HasResponded),
+                _ => query
+            };
+
+            query = sortBy switch
+            {
+                "name_desc" => query.OrderByDescending(g => g.FirstName).ThenByDescending(g => g.LastName),
+                "status" => query.OrderByDescending(g => g.HasResponded).ThenByDescending(g => g.Attendance),
+                "status_desc" => query.OrderBy(g => g.HasResponded).ThenBy(g => g.Attendance),
+                "date" => query.OrderBy(g => g.RegistrationDate),
+                "date_desc" => query.OrderByDescending(g => g.RegistrationDate),
+                _ => query.OrderBy(g => g.FirstName).ThenBy(g => g.LastName)
+            };
+
+            return await query.ToListAsync();
+        }
     }
 }

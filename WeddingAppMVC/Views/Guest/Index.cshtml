@@ -1,4 +1,4 @@
-﻿@model List<Guest>
+﻿@model GuestListViewModel
 @{
     ViewData["Title"] = "List guests";
 }
@@ -6,31 +6,74 @@
 <section class="section-background text-center">
     <h1>All guests</h1>
 
-    <table class="table table-striped table-hover guest-table">
+    <div class="mb-3">
+        <p class="mb-1">
+            <strong>Registered: </strong> @Model.TotalGuests | 
+            <strong>Attending: </strong> @Model.Attending |
+            <strong>Not attending: </strong> @Model.NotAttending |
+            <strong>No response: </strong> @Model.NotAnswered
+        </p>
+    </div>
+
+    <form method="get" asp-action="Index" class="row g-2 justify-content-center mb-3">
+        <div class="col-auto">
+            <select asp-for="Filter" class="form-select" onchange="this.form.submit()"> @*Do not need to click a button, results are updated when user changes options in menu*@
+                <option value="">All guests</option>
+                <option value="attending">Attending</option>
+                <option value="notattending">Not attending</option>
+                <option value="notanswered">Not answered</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <select asp-for="SortBy" class="form-select" onchange="this.form.submit()">
+                <option value="">Name (A-Z)</option>
+                <option value="name_desc">Name (Z-A)</option>
+                <option value="status">RSVP status</option>
+                <option value="status_desc">RSVP status (reversed)</option>
+                <option value="date">Registration date (oldest)</option>
+                <option value="date_desc">Registration date (newest)</option>
+            </select>
+        </div>
+    </form>
+
+    <p class="text-under-title d-lg-none">Some columns are hidden on smaller screens. Open the guest details to see all information.</p>
+
+    <table class="table table-striped table-hover guest-table table-responsive">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Email</th>
+                <th class="d-none d-md-table-cell">Email</th>
                 <th>Phone</th>
                 <th>Attending</th>
-                <th>Number of attendants</th>
-                <th class="message-col">Message</th>
-                <th>Registration date</th>
-                <th>Handle guest</th>
+                <th class="d-none d-md-table-cell">Number of attendants</th>
+                <th class="message-col d-none d-lg-table-cell">Message</th>
+                <th class="d-none d-lg-table-cell">Registration date</th>
+                <th>Options</th>
             </tr>
         </thead>
     <tbody>
-            @foreach(var guest in Model)
+            @foreach(var guest in Model.Guests)
             {
                 <tr>
-                    <td><a asp-controller="Guest" asp-action="Details" asp-route-id=@guest.Id>@guest.FullName</a></td>
-                    <td>@guest.Email</td>
+                    <td><a asp-controller="Guest" asp-action="Details" asp-route-id=@guest.Id class="link-in-text">@guest.FullName</a></td>
+                    <td class="d-none d-md-table-cell">@guest.Email</td>
                     <td>@guest.PhoneNumber</td>
-                    <td>@(guest.Attendance ? "Yes" : "No")
-                    </td>
-                    <td>@guest.NumberOfAttendants</td>
-                    <td>@guest.Message</td>
-                    <td>@guest.RegistrationDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+
+                    @if (!guest.HasResponded)
+                    {
+                        <td>No response</td>
+                        <td class="d-none d-md-table-cell">0</td>
+                    }
+                    else
+                    {
+                        <td>@(guest.Attendance ? "Yes" : "No")</td>
+                        <td class="d-none d-md-table-cell">@(guest.Attendance ? guest.NumberOfAttendants : 0)</td>
+                    }
+
+                    <td class="d-none d-lg-table-cell">@guest.Message</td>
+                    <td class="d-none d-lg-table-cell">@guest.RegistrationDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+
+                    <!--Dropdown menu for managing guest-->
                     <td class="text-nowrap">
                         <div class="dropdown d-inline-block">
                             <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
