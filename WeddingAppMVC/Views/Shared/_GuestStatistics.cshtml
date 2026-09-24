@@ -1,0 +1,44 @@
+﻿@model GuestStatistics
+
+<div class="row g-2 mb-4 justify-content-center">
+    <div class="col-6 col-md">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="fs-3 fw-bold">@Model.TotalGuests</div>
+                <div>Registered guests</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="fs-3 fw-bold">@Model.Attending</div>
+                <div>Attending</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="fs-3 fw-bold">@Model.NotAttending</div>
+                <div>Not attending</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="fs-3 fw-bold">@Model.NotAnswered</div>
+                <div>No response</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="fs-3 fw-bold">@Model.TotalAttendants</div>
+                <div>Total attendants</div>
+            </div>
+        </div>
+    </div>
+</div>

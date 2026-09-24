@@ -1,0 +1,14 @@
+﻿@model Event
+@{
+    ViewData["Title"] = "Create event";
+}
+
+<section class="section-background">
+    <h1 class="text-center">Create event</h1>
+
+    <form asp-action="Create" method="post">
+        <partial name="_EventForm" />
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-controller="Home" asp-action="Dashboard" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+</section>

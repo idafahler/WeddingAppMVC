@@ -6,14 +6,8 @@
 <section class="section-background text-center">
     <h1>All guests</h1>
 
-    <div class="mb-3">
-        <p class="mb-1">
-            <strong>Registered: </strong> @Model.TotalGuests | 
-            <strong>Attending: </strong> @Model.Attending |
-            <strong>Not attending: </strong> @Model.NotAttending |
-            <strong>No response: </strong> @Model.NotAnswered
-        </p>
-    </div>
+    <h2 class="text-under-title">RSVP statistics</h2>
+    <partial name="_GuestStatistics" model="Model.Statistics" />
 
     <form method="get" asp-action="Index" class="row g-2 justify-content-center mb-3">
         <div class="col-auto">

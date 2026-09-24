@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeddingAppMVC.Models
 {
     public class Event
     {
+        [BindNever]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Title is required")]

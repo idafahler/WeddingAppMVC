@@ -13,21 +13,15 @@ namespace WeddingAppMVC.Controllers
         }
         public async Task<IActionResult> Index(string? filter, string? sortBy)
         {
-            List<Guest> allGuests = await _service.GetAllAsync();
-
-            var viewModel = new GuestListViewModel
+            var vm = new GuestListViewModel
             {
                 Guests = await _service.GetFilteredAsync(filter, sortBy),
                 Filter = filter,
                 SortBy = sortBy,
-                TotalGuests = allGuests.Count,
-                Attending = allGuests.Count(g => g.HasResponded && g.Attendance),
-                NotAttending = allGuests.Count(g => g.HasResponded && !g.Attendance),
-                NotAnswered = allGuests.Count(g => !g.HasResponded),
-                TotalAttendants = allGuests.Where(g => g.HasResponded && g.Attendance).Sum(g => g.NumberOfAttendants ?? 0)
+                Statistics = await _service.GetStatisticsAsync()
             };
 
-            return View(viewModel);
+            return View(vm);
         }
 
         public IActionResult Create()
@@ -40,6 +34,7 @@ namespace WeddingAppMVC.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
+
             await _service.AddAsync(guest);
             return RedirectToAction(nameof(Index));
         }
@@ -57,7 +52,10 @@ namespace WeddingAppMVC.Controllers
         public async Task<IActionResult> Rsvp(int id, Guest guest)
         {
             if (!ModelState.IsValid)
+            {
+                guest.Id = id;
                 return View(guest);
+            }
 
             guest.HasResponded = true;
 
@@ -105,6 +103,7 @@ namespace WeddingAppMVC.Controllers
                     return NotFound();
 
                 guest.HasResponded = existing.HasResponded;
+                guest.Id = id;
                 return View(guest);
             }
 

@@ -84,5 +84,20 @@ namespace WeddingAppMVC.Services
 
             return await query.ToListAsync();
         }
+
+        public async Task<GuestStatistics> GetStatisticsAsync()
+        {
+            var guests = await _context.Guests.ToListAsync();
+
+            return new GuestStatistics
+            {
+                TotalGuests = guests.Count,
+                Attending = guests.Count(g => g.HasResponded && g.Attendance),
+                NotAttending = guests.Count(g => g.HasResponded && !g.Attendance),
+                NotAnswered = guests.Count(g => !g.HasResponded),
+                TotalAttendants = guests.Where(g => g.HasResponded && g.Attendance)
+                                .Sum(g => g.NumberOfAttendants ?? 0)
+            };
+        }
     }
 }
