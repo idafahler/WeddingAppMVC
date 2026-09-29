@@ -31,7 +31,7 @@ namespace WeddingAppMVC.Migrations
             migrationBuilder.InsertData(
                 table: "WeddingInfos",
                 columns: new[] { "Id", "ClosingMessage", "Contact", "Description", "Title", "WebsiteDescription", "WelcomeMessage" },
-                values: new object[] { 1, "We can't wait to celebrate with you!", "alice.bob@example.com", "We’re so happy to have you here! Welcome to the official wedding website of Alice &amp; Bob. ", "Alice & Bob's forever begins", "Here you can find information about the wedding and RSVP.", "Welcome to our wedding!" });
+                values: new object[] { 1, "We can't wait to celebrate with you!", "alice.bob@example.com", "We’re so happy to have you here! Welcome to the official wedding website of Alice & Bob. ", "Alice & Bob's forever begins", "Here you can find information about the wedding and RSVP. If you need to contact us, contact our email below.", "Welcome to our wedding!" });
         }
 
         /// <inheritdoc />

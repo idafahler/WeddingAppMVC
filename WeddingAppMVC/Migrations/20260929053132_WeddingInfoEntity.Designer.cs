@@ -12,7 +12,7 @@ using WeddingAppMVC.Data;
 namespace WeddingAppMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260929043808_WeddingInfoEntity")]
+    [Migration("20260929053132_WeddingInfoEntity")]
     partial class WeddingInfoEntity
     {
         /// <inheritdoc />
@@ -288,9 +288,9 @@ namespace WeddingAppMVC.Migrations
                             Id = 1,
                             ClosingMessage = "We can't wait to celebrate with you!",
                             Contact = "alice.bob@example.com",
-                            Description = "We’re so happy to have you here! Welcome to the official wedding website of Alice &amp; Bob. ",
+                            Description = "We’re so happy to have you here! Welcome to the official wedding website of Alice & Bob. ",
                             Title = "Alice & Bob's forever begins",
-                            WebsiteDescription = "Here you can find information about the wedding and RSVP.",
+                            WebsiteDescription = "Here you can find information about the wedding and RSVP. If you need to contact us, contact our email below.",
                             WelcomeMessage = "Welcome to our wedding!"
                         });
                 });

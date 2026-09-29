@@ -6,12 +6,17 @@
 <section class="section-background text-center">
     <h1>All guests</h1>
     <p class="text-under-title">On this page you will find statistics about answering guests, but also manage the registered guests.</p>
-    <p class="text-under-title">Registering a <strong>new guest</strong> is done on another page. <a class="link-in-text" asp-controller="Guest" asp-action="Create">Click here</a></p>
+    <p class="text-under-title">If you want to register a <strong>new guest</strong>. <a class="link-in-text" asp-controller="Guest" asp-action="Create">Click here</a></p>
 
-    <h2>RSVP statistics</h2>
-    <partial name="_GuestStatistics" model="Model.Statistics" />
+</section>
+
+@*Guest statistics*@
+<partial name="_GuestStatistics" model="Model.Statistics" />
+
+<section class="section-background text-center">
 
     <h2>List of all registered guests</h2>
+    <p class="text-under-title">Search, filter and sort guests. If you click the manage button you can also see details, edit or delete guest.</p>
 
     <form method="get" asp-action="Index" class="row g-2 justify-content-center mb-3">
         <div class="col-auto">

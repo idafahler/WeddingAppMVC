@@ -5,16 +5,17 @@
 
 <section class="section-background text-center">
     <h1>Dashboard</h1>
-    <p class="text-under-title">Below you will find different sections where you can see more about the wedding - but also manage the information.</p>
-
-
-    <h2>RSVP statistics</h2>
-    <partial name="_GuestStatistics" model="Model.Statistics" />
+    <p class="text-under-title">Below you will find different sections where you can see more about events and the wedding - but also manage the information.</p>
+    <p class="text-under-title">If you want to <strong>manage guests</strong>. <a asp-controller="Guest" asp-action="Index" class="link-in-text">Click here</a></p>
 </section>
+
+@*Guest statistics*@
+<partial name="_GuestStatistics" model="Model.Statistics" />
+
 
 <section class="section-background text-center">
     <h2>Events</h2>
-    <p class="text-under-title">Click the manage button to read more, edit or delete the event.</p>
+    <p class="text-under-title">Click the manage button to edit or delete the event.</p>
     <div class="mb-3">
         <a asp-controller="Event" asp-action="Create" class="btn btn-primary">Create event</a>
         <a asp-controller="Event" asp-action="Index" class="btn btn-outline-secondary">View event page</a>
@@ -62,9 +63,12 @@
 
 <section class="section-background text-center">
     <h2>Wedding information</h2>
-    <button class="btn btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#weddingInfoForm">
-        Edit wedding information
+    <p class="text-under-title">Click the edit button to change information text and details about the wedding.</p>
+    <p class="text-under-title">This information is displayed on the home page. Edit it to your liking.</p>
+    <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#weddingInfoForm">
+        Edit wedding info
     </button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary mb-3">View wedding page</a>
     <div class="collapse @(ViewData.ModelState.IsValid ? "" : "show") text-start" id="weddingInfoForm">
         <form asp-action="UpdateWeddingInfo" method="post" class="mb-4">
             <div class="mb-3">
