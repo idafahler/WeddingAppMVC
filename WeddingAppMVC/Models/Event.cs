@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WeddingAppMVC.Models
 {
-    public class Event
+    public class Event : IValidatableObject
     {
         [BindNever]
         public int Id { get; set; }
@@ -33,5 +33,11 @@ namespace WeddingAppMVC.Models
         [Required(ErrorMessage = "Description of some sort must be entered")]
         [StringLength(1000, MinimumLength = 5, ErrorMessage = "Must be between 5-1000 characters")]
         public string Description { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (EndTime.HasValue && EndTime <= StartTime)
+                yield return new ValidationResult("Ending time must be after starting time", new[] { nameof(EndTime) });
+        }
     }
 }

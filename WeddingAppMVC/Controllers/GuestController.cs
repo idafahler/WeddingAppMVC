@@ -11,13 +11,14 @@ namespace WeddingAppMVC.Controllers
         {
             _service = service;
         }
-        public async Task<IActionResult> Index(string? filter, string? sortBy)
+        public async Task<IActionResult> Index(string? filter, string? sortBy, string? search)
         {
             var vm = new GuestListViewModel
             {
-                Guests = await _service.GetFilteredAsync(filter, sortBy),
+                Guests = await _service.GetFilteredAsync(filter, sortBy, search),
                 Filter = filter,
                 SortBy = sortBy,
+                Search = search,
                 Statistics = await _service.GetStatisticsAsync()
             };
 
@@ -33,7 +34,7 @@ namespace WeddingAppMVC.Controllers
         public async Task<IActionResult> Create(Guest guest)
         {
             if (!ModelState.IsValid)
-                return View();
+                return View(guest);
 
             await _service.AddAsync(guest);
             return RedirectToAction(nameof(Index));

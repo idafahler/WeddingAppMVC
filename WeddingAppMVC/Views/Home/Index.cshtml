@@ -1,4 +1,4 @@
-﻿@model Event
+﻿@model WeddingInfo
 @{
     ViewData["Title"] = "Home";
 }
@@ -10,7 +10,7 @@
     </article>
 
     <article class="text-section">
-        <h2>You are invited to the wedding of Alice &amp; Bob</h2>
+        <h2>@Model.Title</h2>
 
         <div class="image-banner">
             <img class="banner-picture" src="~/images/img-banner1.png" alt="Bridal pair" />
@@ -20,12 +20,10 @@
             <img class="banner-picture" src="~/images/img-banner5.png" alt="Bow" />
         </div>
 
-        <p>
-            We’re so happy to have you here!
-            Welcome to the official wedding website of Alice &amp; Bob.
-            Here you’ll be able to see information about the different events, 
-            register guests and rvsp for guests. 
-        </p>
-        <p class="text-under-title"><i>We can’t wait to celebrate with you!</i></p>
+        <p class="text-under-title">@Model.WelcomeMessage</p>
+        <p>@Model.Description</p>
+        <p>@Model.WebsiteDescription</p>
+        <a class="link-in-text" href="mailto:@Model.Contact">@Model.Contact</a>
+        <p class="text-under-title"><i>@Model.ClosingMessage</i></p>
     </article>
 </section>

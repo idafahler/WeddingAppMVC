@@ -9,7 +9,7 @@ namespace WeddingAppMVC.Services
         Task<List<Guest>> GetAllAsync();
         Task<Guest?> GetByIdAsync(int id);
         Task<bool> UpdateAsync(int id, Guest input);
-        Task<List<Guest>> GetFilteredAsync(string? filter, string? sortBy);
+        Task<List<Guest>> GetFilteredAsync(string? filter, string? sortBy, string? search);
         Task<GuestStatistics> GetStatisticsAsync();
     }
 }

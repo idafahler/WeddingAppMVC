@@ -4,5 +4,6 @@
     {
         public List<Event> Events { get; set; } = new();
         public GuestStatistics Statistics { get; set; } = new();
+        public WeddingInfo WeddingInfo { get; set; } = new();
     }
 }

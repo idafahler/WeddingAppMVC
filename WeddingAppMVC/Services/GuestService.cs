@@ -45,6 +45,9 @@ namespace WeddingAppMVC.Services
             if (input.HasResponded)
                 guest.HasResponded = true;
 
+            if (!input.Attendance)
+                guest.NumberOfAttendants = null;
+
             await _context.SaveChangesAsync();
             return true;
         }
@@ -60,9 +63,15 @@ namespace WeddingAppMVC.Services
             return true;
         }
 
-        public async Task<List<Guest>> GetFilteredAsync(string? filter, string? sortBy)
+        public async Task<List<Guest>> GetFilteredAsync(string? filter, string? sortBy, string? search)
         {
             IQueryable<Guest> query = _context.Guests;
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.Trim();
+                query = query.Where(g => (g.FirstName + " " + g.LastName).Contains(search));
+            }
 
             query = filter switch
             {

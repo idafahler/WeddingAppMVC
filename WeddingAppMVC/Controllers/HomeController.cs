@@ -9,27 +9,60 @@ namespace WeddingAppMVC.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IGuestService _guestService;
+        private readonly IWeddingInfoService _weddingInfoService;
 
-        public HomeController(IEventService eventService, IGuestService guestService)
+        public HomeController(IEventService eventService, IGuestService guestService, IWeddingInfoService weddingInfoService)
         {
             _eventService = eventService;
             _guestService = guestService;
+            _weddingInfoService = weddingInfoService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            WeddingInfo? info = await _weddingInfoService.GetAsync();
+            if (info is null)
+                return NotFound();
+            return View(info);
         }
 
         public async Task<IActionResult> Dashboard()
         {
+            WeddingInfo? info = await _weddingInfoService.GetAsync();
+            if (info is null)
+                return NotFound();
+
+
             var viewModel = new DashboardViewModel
             {
                 Events = await _eventService.GetAllAsync(),
-                Statistics = await _guestService.GetStatisticsAsync()
+                Statistics = await _guestService.GetStatisticsAsync(),
+                WeddingInfo = info
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateWeddingInfo([Bind(Prefix = "WeddingInfo")] WeddingInfo input)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new DashboardViewModel
+                {
+                    Events = await _eventService.GetAllAsync(),
+                    Statistics = await _guestService.GetStatisticsAsync(),
+                    WeddingInfo = input
+                };
+
+                return View("Dashboard", viewModel);
+            }
+
+            bool updated = await _weddingInfoService.UpdateAsync(input);
+            if (!updated)
+                return NotFound();
+
+            return RedirectToAction(nameof(Dashboard));
         }
 
         public IActionResult Privacy()

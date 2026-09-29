@@ -5,11 +5,21 @@
 
 <section class="section-background text-center">
     <h1>All guests</h1>
+    <p class="text-under-title">On this page you will find statistics about answering guests, but also manage the registered guests.</p>
+    <p class="text-under-title">Registering a <strong>new guest</strong> is done on another page. <a class="link-in-text" asp-controller="Guest" asp-action="Create">Click here</a></p>
 
-    <h2 class="text-under-title">RSVP statistics</h2>
+    <h2>RSVP statistics</h2>
     <partial name="_GuestStatistics" model="Model.Statistics" />
 
+    <h2>List of all registered guests</h2>
+
     <form method="get" asp-action="Index" class="row g-2 justify-content-center mb-3">
+        <div class="col-auto">
+            <div class="input-group">
+                <input asp-for="Search" type="search" class="form-control" placeholder="Search name" aria-label="Search guests" />
+                <button type="submit" class="btn btn-outline-secondary">Search</button>
+            </div>
+        </div>
         <div class="col-auto">
             <select asp-for="Filter" class="form-select" onchange="this.form.submit()"> @*Do not need to click a button, results are updated when user changes options in menu*@
                 <option value="">All guests</option>
@@ -30,7 +40,7 @@
         </div>
     </form>
 
-    <p class="text-under-title d-lg-none">Some columns are hidden on smaller screens. Open the guest details to see all information.</p>
+    <p class="text-under-title d-lg-none">Some columns are hidden on smaller screens. Open the guest details to see all available information about the guest.</p>
 
     <table class="table table-striped table-hover guest-table table-responsive">
         <thead>
@@ -45,7 +55,11 @@
                 <th>Options</th>
             </tr>
         </thead>
-    <tbody>
+        <tbody>
+            @if (!Model.Guests.Any())
+            {
+                <tr><td colspan="8">No guests match your search.</td></tr>
+            }
             @foreach(var guest in Model.Guests)
             {
                 <tr>
@@ -65,7 +79,7 @@
                     }
 
                     <td class="d-none d-lg-table-cell">@guest.Message</td>
-                    <td class="d-none d-lg-table-cell">@guest.RegistrationDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                    <td class="d-none d-lg-table-cell">@guest.RegistrationDate.ToString("yyyy-MM-dd HH:mm")</td>
 
                     <!--Dropdown menu for managing guest-->
                     <td class="text-nowrap">

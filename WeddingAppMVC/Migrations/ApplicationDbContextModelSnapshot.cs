@@ -236,6 +236,61 @@ namespace WeddingAppMVC.Migrations
                             RegistrationDate = new DateTime(2026, 9, 7, 8, 20, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
+
+            modelBuilder.Entity("WeddingAppMVC.Models.WeddingInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClosingMessage")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("WebsiteDescription")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("WelcomeMessage")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WeddingInfos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClosingMessage = "We can't wait to celebrate with you!",
+                            Contact = "alice.bob@example.com",
+                            Description = "We’re so happy to have you here! Welcome to the official wedding website of Alice &amp; Bob. ",
+                            Title = "Alice & Bob's forever begins",
+                            WebsiteDescription = "Here you can find information about the wedding and RSVP.",
+                            WelcomeMessage = "Welcome to our wedding!"
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }

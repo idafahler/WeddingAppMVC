@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WeddingAppMVC.Models
 {
-    public class Guest
+    public class Guest : IValidatableObject
     {
         [BindNever] //Id is set in controller, not by the user in form
         public int Id { get; set; }
@@ -59,5 +59,12 @@ namespace WeddingAppMVC.Models
 
 
         public string FullName => $"{FirstName} {LastName}";
+
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Attendance && NumberOfAttendants is null)
+                yield return new ValidationResult("Enter number of attendants", new[] { nameof(NumberOfAttendants) });
+        }
     }
 }

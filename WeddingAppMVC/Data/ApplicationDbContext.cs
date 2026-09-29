@@ -7,6 +7,7 @@ namespace WeddingAppMVC.Data
     {
         public DbSet<Guest> Guests { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<WeddingInfo> WeddingInfos { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -36,6 +37,18 @@ namespace WeddingAppMVC.Data
                 new Guest { Id = 6, FirstName = "Erik", LastName = "Svensson", Email = "erik.svensson@example.com", PhoneNumber = "070 678 90 12", Attendance = true, NumberOfAttendants = 4, Message = "Bringing the kids, hope that's fine.", RegistrationDate = new DateTime(2026, 9, 6, 20, 0, 0), HasResponded = true },
                 new Guest { Id = 7, FirstName = "Maja", LastName = "Holm", Email = "maja.holm@example.com", PhoneNumber = "073 789 01 23", Attendance = false, NumberOfAttendants = 1, Message = "Sadly can't make it, congratulations!", RegistrationDate = new DateTime(2026, 9, 7, 8, 20, 0), HasResponded = true }
             );
+
+            modelBuilder.Entity<WeddingInfo>().HasData(
+                new WeddingInfo
+                {
+                    Id = 1,
+                    Title = "Alice & Bob's forever begins",
+                    WelcomeMessage = "Welcome to our wedding!",
+                    Description = "We’re so happy to have you here! Welcome to the official wedding website of Alice & Bob. ",
+                    Contact = "alice.bob@example.com",
+                    WebsiteDescription = "Here you can find information about the wedding and RSVP. If you need to contact us, contact our email below.",
+                    ClosingMessage = "We can't wait to celebrate with you!"
+                });
         }
     }
 }

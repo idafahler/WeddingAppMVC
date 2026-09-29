@@ -23,6 +23,7 @@ namespace WeddingAppMVC
 
             builder.Services.AddScoped<IGuestService, GuestService>();
             builder.Services.AddScoped<IEventService, EventService>();
+            builder.Services.AddScoped<IWeddingInfoService, WeddingInfoService>();
 
             var app = builder.Build();
 

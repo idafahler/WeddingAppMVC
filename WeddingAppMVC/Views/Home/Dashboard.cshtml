@@ -5,11 +5,16 @@
 
 <section class="section-background text-center">
     <h1>Dashboard</h1>
+    <p class="text-under-title">Below you will find different sections where you can see more about the wedding - but also manage the information.</p>
 
-    <h2 class="text-under-title">RSVP statistics</h2>
+
+    <h2>RSVP statistics</h2>
     <partial name="_GuestStatistics" model="Model.Statistics" />
+</section>
 
-    <h2 class="text-under-title">Events</h2>
+<section class="section-background text-center">
+    <h2>Events</h2>
+    <p class="text-under-title">Click the manage button to read more, edit or delete the event.</p>
     <div class="mb-3">
         <a asp-controller="Event" asp-action="Create" class="btn btn-primary">Create event</a>
         <a asp-controller="Event" asp-action="Index" class="btn btn-outline-secondary">View event page</a>
@@ -53,4 +58,47 @@
             }
         </tbody>
     </table>
+</section>
+
+<section class="section-background text-center">
+    <h2>Wedding information</h2>
+    <button class="btn btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#weddingInfoForm">
+        Edit wedding information
+    </button>
+    <div class="collapse @(ViewData.ModelState.IsValid ? "" : "show") text-start" id="weddingInfoForm">
+        <form asp-action="UpdateWeddingInfo" method="post" class="mb-4">
+            <div class="mb-3">
+                <label asp-for="WeddingInfo.Title" class="form-label"></label>
+                <input asp-for="WeddingInfo.Title" class="form-control" />
+                <span asp-validation-for="WeddingInfo.Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WeddingInfo.WelcomeMessage" class="form-label"></label>
+                <textarea asp-for="WeddingInfo.WelcomeMessage" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="WeddingInfo.WelcomeMessage" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WeddingInfo.Description" class="form-label"></label>
+                <textarea asp-for="WeddingInfo.Description" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="WeddingInfo.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WeddingInfo.Contact" class="form-label"></label>
+                <textarea asp-for="WeddingInfo.Contact" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="WeddingInfo.Contact" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WeddingInfo.WebsiteDescription" class="form-label"></label>
+                <textarea asp-for="WeddingInfo.WebsiteDescription" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="WeddingInfo.WebsiteDescription" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WeddingInfo.ClosingMessage" class="form-label"></label>
+                <textarea asp-for="WeddingInfo.ClosingMessage" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="WeddingInfo.ClosingMessage" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
 </section>
